@@ -3,18 +3,16 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour 
 {
-    public Transform ScreenFade;
-
-    FadeInandOut fadeInandOut;
+    FadeInandOut fadeOut;
 
     void Awake()
     {
-        fadeInandOut = GameObject.FindGameObjectWithTag(Tags.FadeInandOut).GetComponent<FadeInandOut>();
+        fadeOut = GameObject.FindGameObjectWithTag(Tags.FadeOut).GetComponent<FadeInandOut>();
     }
 
     public void LoadScene(int i)
     {
-        fadeInandOut.EndScene();
+        fadeOut.EndScene();
         StartCoroutine(DelayLoad(i));
     }
 
@@ -30,12 +28,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DelayLoad(int i)
     {
-        if (!fadeInandOut.SceneEnded)
+        if (!fadeOut.SceneEnded)
         {
             yield return 0;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         Application.LoadLevel(i);
     }
