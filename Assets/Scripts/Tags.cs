@@ -6,6 +6,7 @@ public static class Tags
     public const string Player = "Player";
     public const string NPC = "NPC";
     public const string Enemy = "Enemy";
-    public const string FadeInandOut = "FadeInandOut";
+    public const string FadeIn = "FadeIn";
+    public const string FadeOut = "FadeOut";
 }
 
