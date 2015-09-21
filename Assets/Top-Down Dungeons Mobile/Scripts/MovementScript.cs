@@ -4,12 +4,14 @@ using System.Collections;
 public class MovementScript : MonoBehaviour
 {
     public float speed = 10.0f;
-    public CharacterAnimationController cac;
-    CharacterController cc;
+    public UnitController unitController;
+    public CharacterController cc;
 
-    void Awake()
+    protected AnimationController aniC;
+
+    void Start()
     {
-        cc = GetComponent<CharacterController>();
+        aniC = unitController.animationController;
     }
 
     void FixedUpdate()
@@ -18,15 +20,15 @@ public class MovementScript : MonoBehaviour
         move.x = -Input.GetAxis("Horizontal") * speed;
         move.z = -Input.GetAxis("Vertical") * speed;
 
-        if (move != Vector3.zero && !cac.IsPlaying)
+        if (move != Vector3.zero && !aniC.IsPlaying)
         {
-            cac.SetRun();
+            aniC.SetAnimationStatus(Status.Run);
             transform.rotation = Quaternion.LookRotation(move, Vector3.up);
             cc.SimpleMove(move);
         }
-        else
+        else if (!aniC.IsPlaying)
         {
-            cac.SetIdle();
+            aniC.SetAnimationStatus(Status.Idle);
         }
 
 
